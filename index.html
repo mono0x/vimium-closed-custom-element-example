@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Custom Element Test</title>
+    <script>
+        class BaseCustomTextEditor extends HTMLElement {
+            constructor(mode) {
+                super()
+
+                const shadow = this.attachShadow({ mode: mode })
+                const textarea = document.createElement("textarea")
+                shadow.appendChild(textarea)
+            }
+        }
+
+        class OpenCustomTextEditor extends BaseCustomTextEditor {
+            constructor() {
+                super("open")
+            }
+        }
+
+
+        class ClosedCustomTextEditor extends BaseCustomTextEditor {
+            constructor() {
+                super("closed")
+            }
+        }
+
+        customElements.define("open-custom-text-editor", OpenCustomTextEditor)
+        customElements.define("closed-custom-text-editor", ClosedCustomTextEditor)
+    </script>
+</head>
+
+<body>
+    <h1>Custom Element Test</h1>
+
+    <h2>Textarea</h2>
+    <textarea></textarea>
+
+    <h2>Custom Element (Open)</h2>
+    <open-custom-text-editor></open-custom-text-editor>
+
+    <h2>Custom Element (Closed)</h2>
+    <closed-custom-text-editor></closed-custom-text-editor>
+</body>
+
+</html>
